@@ -1,11 +1,11 @@
 ### Note
 
-1. `actions/index.js` defines the functions that guide us what needs to do.
+1. `actions/index.js` defines the functions that guide us how to do.
 ```js
 // App.jsx
 import { connect } from "react-redux";
 import { addReminder, delReminder, clearReminder } from "../actions";
-//function mapStateToProps(state) {
+function mapStateToProps(state) {
   return {
     reminders: state
   };
