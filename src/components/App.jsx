@@ -24,22 +24,24 @@ class App extends Component {
   renderReminder() {
     const { reminders } = this.props
     return (
-      <ul className='list-group col-sm-5'>
+      <ul className="list-group col-sm-5">
         {reminders.map((reminder, key) => {
           return (
-            <li key={reminder.id} className='list-group-item'>
-              <div className='list-item'>
-                <div>{reminder.text}</div>
-                <div>
-                  <em>{moment(new Date(reminder.dueDate)).fromNow()}</em>
+            <li key={reminder.id} className="list-group-item">
+              <li key={reminder.id} className="list-group-item">
+                <div className="list-item">
+                  <div>{reminder.text}</div>
+                  <div>
+                    <em>{moment(new Date(reminder.dueDate)).fromNow()}</em>
+                  </div>
                 </div>
+                <div
+                  className="list-item delete"
+                  onClick={() => this.delReminder(reminder.id)}
+                >
+                  &#x2715
               </div>
-              <div
-                className='list-item delete'
-                onClick={() => this.delReminder(reminder.id)}
-              >
-                &#x2715
-              </div>
+              </li>
             </li>
           )
         })}
@@ -49,36 +51,36 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
-        <div className='title'>ReminderPro</div>
-        <div className='form-inline'>
-          <div className='form-group'>
+      <div className="App" >
+        <div className="title">ReminderPro</div>
+        <div className="form-inline">
+          <div className="form-group">
             <input
               autoFocus
-              className='form-control'
-              placeholder='To Do...'
+              className="form-control"
+              placeholder="To Do..."
               onKeyPress={(e) => {
                 if (e.key === 'Enter') this.addReminder()
               }}
               onChange={e => this.setState({ text: e.target.value })}
             />
             <input
-              className='form-control'
-              type='datetime-local'
+              className="form-control"
+              type="datetime-local"
               onChange={e => this.setState({ dueDate: e.target.value })}
             />
           </div>
         </div>
         <button
-          type='button'
-          className='btn btn-success'
+          type="button"
+          className="btn btn-success"
           onClick={() => this.addReminder()}
         >
           Add Reminder
         </button>
         {this.renderReminder()}
         <div
-          className='btn btn-danger'
+          className="btn btn-danger"
           onClick={() => {
             this.props.clearReminder()
           }}
