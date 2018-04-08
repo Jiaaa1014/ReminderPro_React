@@ -1,28 +1,77 @@
 body {
-  background: #9e7a7a;
-  font-family: "Trebuchet MS";
+    background: #eee;
+    font-family: "Trebuchet MS";
 }
 
 .App {
-  margin-top: 5%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.App>* {
+    margin-bottom: 30px;
+}
+
+.form input {
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 8px
+}
+
+.form input:first-child {
+    margin-bottom: 30px
 }
 
 .title {
-  font-size: 3em;
-  /* text-align: center */
-}
-
-input {
-  margin: 9% 10px;
+    font-size: 3em;
+    /* text-align: center */
 }
 
 .list-item {
-  display: inline-block;
+    display: inline-block;
+}
+
+.list-item div:first-child {
+    font-weight: 700;
+    font-size: 20px
 }
 
 .delete {
-  float: right;
+    float: right;
+}
+
+.addBtn,
+.delBtn {
+    font: 12px/15px sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+    height: auto;
+    border-radius: 3px;
+    padding: 10px 9px;
+    transition: .2s;
+}
+
+.addBtn {
+    color: #0D0D0D;
+    background: #fff;
+}
+
+.addBtn:hover {
+    color: #fff;
+    background: #0D0D0D;
+}
+
+.delBtn {
+    color: #DB4D6D;
+    background: #fff;
+}
+
+.delBtn:hover {
+    color: #fff;
+    background: #DB4D6D;
 }

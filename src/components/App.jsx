@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 import { addReminder, delReminder, clearReminder } from '../actions'
 
 class App extends Component {
+  static propTypes = {
+    addReminder: PropTypes.func.isRequired,
+    delReminder: PropTypes.func.isRequired,
+    clearReminder: PropTypes.func.isRequired,
+    reminders: PropTypes.array.isRequired
+  }
   constructor(props) {
     super(props)
     this.state = {
@@ -13,38 +20,36 @@ class App extends Component {
   }
 
   addReminder() {
-    console.log('this.state.dueDate', this.state.dueDate)
     this.props.addReminder(this.state.text, this.state.dueDate)
   }
   delReminder(id) {
     this.props.delReminder(id)
-    console.log('deleting in application')
   }
 
   renderReminder() {
     const { reminders } = this.props
     return (
-      <ul className="list-group col-sm-5">
-        {reminders.map((reminder, key) => {
-          return (
+      <ul className="col-sm-8 ">
+        {reminders.map(reminder => (
+          <li key={reminder.id} className="list-group-item">
             <li key={reminder.id} className="list-group-item">
-              <li key={reminder.id} className="list-group-item">
-                <div className="list-item">
-                  <div>{reminder.text}</div>
-                  <div>
-                    <em>{moment(new Date(reminder.dueDate)).fromNow()}</em>
-                  </div>
+              <div className="list-item">
+                <div>{reminder.text}</div>
+                <div>
+                  <em>{moment(new Date(reminder.dueDate)).fromNow()}</em>
                 </div>
-                <div
-                  className="list-item delete"
-                  onClick={() => this.delReminder(reminder.id)}
-                >
-                  &#x2715
               </div>
-              </li>
+              <div
+                role="button"
+                tabIndex="0"
+                className="list-item delete"
+                onClick={() => this.delReminder(reminder.id)}
+                onKeyDown={() => this.delReminder(reminder.id)}
+              >&#x2715;
+              </div>
             </li>
-          )
-        })}
+          </li>
+        ))}
       </ul>
     )
   }
@@ -53,39 +58,44 @@ class App extends Component {
     return (
       <div className="App" >
         <div className="title">ReminderPro</div>
-        <div className="form-inline">
-          <div className="form-group">
-            <input
-              autoFocus
-              className="form-control"
-              placeholder="To Do..."
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') this.addReminder()
-              }}
-              onChange={e => this.setState({ text: e.target.value })}
-            />
-            <input
-              className="form-control"
-              type="datetime-local"
-              onChange={e => this.setState({ dueDate: e.target.value })}
-            />
-          </div>
+        <div className="form">
+          <input
+            className="form-control"
+            placeholder="To Do..."
+            onKeyPress={(e) => {
+              if (!e.target.value) return false
+              if (e.key === 'Enter') return this.addReminder()
+            }}
+            onChange={e => this.setState({ text: e.target.value })}
+          />
+          <input
+            className="form-control"
+            placeholder="What time..."
+            type="date"
+            onChange={e => this.setState({ dueDate: e.target.value })}
+          />
         </div>
         <button
           type="button"
-          className="btn btn-success"
+          className="addBtn"
           onClick={() => this.addReminder()}
-        >
-          Add Reminder
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') this.addReminder()
+          }}
+        >Add Reminder
         </button>
         {this.renderReminder()}
         <div
-          className="btn btn-danger"
+          role="button"
+          tabIndex="0"
+          className="delBtn"
           onClick={() => {
             this.props.clearReminder()
           }}
-        >
-          Clear Reminders
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') this.clearReminder()
+          }}
+        >Clear Reminders
         </div>
       </div>
     )
