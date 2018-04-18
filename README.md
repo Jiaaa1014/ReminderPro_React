@@ -1,4 +1,5 @@
-### Note
+# Note
+## files
 
 1. `actions/index.js` defines the functions that guide us how to do.
 ```js
@@ -16,7 +17,7 @@ export default connect(mapStateToProps, { addReminder, delReminder, clearReminde
 3. Amazing library [`moment`](https://momentjs.com/), for parsing and manipulating Date.
 
 
-### details
+## tabIndex
 加上tabIndex的用意是在於說，如果滑鼠沒有效果那要如何點到這個按鈕？平常帳號打完習慣tab切到下一個，如此就派上用場
 
 ```jsx
