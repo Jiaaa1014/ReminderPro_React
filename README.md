@@ -1,4 +1,4 @@
-# Note
+# Notes
 ## files
 
 1. `actions/index.js` defines the functions that guide us how to do.
