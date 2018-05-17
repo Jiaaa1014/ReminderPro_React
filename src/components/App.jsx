@@ -19,12 +19,9 @@ class App extends Component {
     }
   }
 
-  addReminder() {
-    this.props.addReminder(this.state.text, this.state.dueDate)
-  }
-  delReminder(id) {
-    this.props.delReminder(id)
-  }
+  addReminder = () => this.props.addReminder(this.state.text, this.state.dueDate)
+
+  delReminder = id => this.props.delReminder(id)
 
   renderReminder() {
     const { reminders } = this.props
@@ -63,8 +60,7 @@ class App extends Component {
             className="form-control"
             placeholder="To Do..."
             onKeyPress={(e) => {
-              if (!e.target.value) return false
-              if (e.key === 'Enter') return this.addReminder()
+              if (e.key === 'Enter' && e.target.value) this.addReminder()
             }}
             onChange={e => this.setState({ text: e.target.value })}
           />
@@ -72,6 +68,9 @@ class App extends Component {
             className="form-control"
             placeholder="What time..."
             type="date"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && e.target.value) this.addReminder()
+            }}
             onChange={e => this.setState({ dueDate: e.target.value })}
           />
         </div>
@@ -103,6 +102,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     reminders: state
   }

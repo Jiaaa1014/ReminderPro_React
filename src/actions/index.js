@@ -4,25 +4,17 @@ import {
   CLEAR_REMINDER
 } from '../constants'
 
-export const addReminder = (text, dueDate) => {
-  const action = {
-    type: ADD_REMINDER,
-    text,
-    dueDate
-  }
-  return action
-}
+export const addReminder = (text, dueDate) => ({
+  type: ADD_REMINDER,
+  text,
+  dueDate
+})
 
-export const delReminder = (id) => {
-  const action = {
-    type: DELETE_REMINDER,
-    id
-  }
-  return action
-}
+export const delReminder = id => ({
+  type: DELETE_REMINDER,
+  id
+})
 
-export const clearReminder = () => {
-  return {
-    type: CLEAR_REMINDER
-  }
-}
+export const clearReminder = () => ({
+  type: CLEAR_REMINDER
+})
